@@ -1,24 +1,12 @@
-var gulp = require("gulp");
-var sass = require("gulp-sass");
-var header = require("gulp-header");
-var cleanCSS = require("gulp-clean-css");
-var rename = require("gulp-rename");
-var uglify = require("gulp-uglify");
-var pkg = require("./package.json");
-var browserSync = require("browser-sync").create();
-
-// Set the banner content
-var banner = [
-  "/*!\n",
-  " * Snow Goat - <%= pkg.title %> v<%= pkg.version %> (<%= pkg.homepage %>)\n",
-  " * Copyright 2013-" + new Date().getFullYear(),
-  " <%= pkg.author %>\n",
-  " */\n",
-  "",
-].join("");
+const gulp = require("gulp");
+const sass = require("gulp-sass")(require("sass"));
+const cleanCSS = require("gulp-clean-css");
+const rename = require("gulp-rename");
+const uglify = require("gulp-uglify");
+const browserSync = require("browser-sync").create();
 
 // Copy third party libraries from /node_modules into /vendor
-gulp.task("vendor", function () {
+gulp.task("vendor", () => {
   // Bootstrap
   gulp
     .src([
@@ -59,7 +47,7 @@ gulp.task("vendor", function () {
 });
 
 // Compile SCSS
-gulp.task("css:compile", function () {
+gulp.task("css:compile", () => {
   return gulp
     .src("./scss/**/*.scss")
     .pipe(
@@ -73,24 +61,27 @@ gulp.task("css:compile", function () {
 });
 
 // Minify CSS
-gulp.task("css:minify", ["css:compile"], function () {
-  return gulp
-    .src(["./css/*.css", "!./css/*.min.css"])
-    .pipe(cleanCSS())
-    .pipe(
-      rename({
-        suffix: ".min",
-      })
-    )
-    .pipe(gulp.dest("./css"))
-    .pipe(browserSync.stream());
-});
+gulp.task(
+  "css:minify",
+  gulp.series("css:compile", () => {
+    return gulp
+      .src(["./css/*.css", "!./css/*.min.css"])
+      .pipe(cleanCSS())
+      .pipe(
+        rename({
+          suffix: ".min",
+        })
+      )
+      .pipe(gulp.dest("./css"))
+      .pipe(browserSync.stream());
+  })
+);
 
 // CSS
-gulp.task("css", ["css:compile", "css:minify"]);
+gulp.task("css", gulp.series("css:compile", "css:minify"));
 
 // Minify JavaScript
-gulp.task("js:minify", function () {
+gulp.task("js:minify", () => {
   return gulp
     .src(["./js/*.js", "!./js/*.min.js"])
     .pipe(uglify())
@@ -104,13 +95,16 @@ gulp.task("js:minify", function () {
 });
 
 // JS
-gulp.task("js", ["js:minify"]);
+gulp.task("js", gulp.task("js:minify"));
 
 // Default task
-gulp.task("default", ["css", "js", "vendor"]);
+gulp.task(
+  "default",
+  gulp.series(gulp.task("css"), gulp.task("js"), gulp.task("vendor"))
+);
 
 // Configure the browserSync task
-gulp.task("browserSync", function () {
+gulp.task("browserSync", () => {
   browserSync.init({
     server: {
       baseDir: "./",
@@ -119,8 +113,11 @@ gulp.task("browserSync", function () {
 });
 
 // Dev task
-gulp.task("dev", ["css", "js", "browserSync"], function () {
-  gulp.watch("./scss/*.scss", ["css"]);
-  gulp.watch("./js/*.js", ["js"]);
-  gulp.watch("./*.html", browserSync.reload);
-});
+gulp.task(
+  "dev",
+  gulp.series("css", "js", "browserSync", () => {
+    gulp.watch("./scss/*.scss", ["css"]);
+    gulp.watch("./js/*.js", ["js"]);
+    gulp.watch("./*.html", browserSync.reload);
+  })
+);
