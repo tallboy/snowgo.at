@@ -245,6 +245,9 @@ header.masthead h2 {
 .goats-modal .goats-modal-dialog h2 {
   font-size: 2rem;
 }
+.goats-modal .goats-modal-dialog .beyonce-irreplaceable {
+  text-align: left;
+}
 @media (min-width: 768px) {
   .goats-modal .goats-modal-dialog {
     min-height: 100vh;

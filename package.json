@@ -19,8 +19,8 @@
         "gulp": "gulp",
         "dev": "gulp dev",
         "css": "gulp css",
-        "minify-css": "gulp minify-css",
-        "gulp minify-js": "gulp minify-js",
+        "minify-css": "gulp css:minify",
+        "gulp minify-js": "gulp js:minify",
         "gulp copy": "gulp copy",
         "lint": "eslint .  --ext .js",
         "lint-fix": "eslint --fix .  --ext .js"
