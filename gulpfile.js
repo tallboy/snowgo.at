@@ -2,7 +2,7 @@ const gulp = require("gulp");
 const sass = require("gulp-sass")(require("sass"));
 const cleanCSS = require("gulp-clean-css");
 const rename = require("gulp-rename");
-const uglify = require("gulp-uglify");
+const terser = require("gulp-terser");
 const imagemin = require("gulp-imagemin");
 const browserSync = require("browser-sync").create();
 
@@ -87,7 +87,7 @@ gulp.task("css", gulp.series("css:compile", "css:minify"));
 gulp.task("js:minify", () => {
   return gulp
     .src(["./js/*.js", "!./js/*.min.js"])
-    .pipe(uglify())
+    .pipe(terser())
     .pipe(
       rename({
         suffix: ".min",
