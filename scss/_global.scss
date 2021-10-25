@@ -103,9 +103,11 @@ section {
 }
 
 // images
-
-.clip-circl {
-  clip-path: circle(200px at center);
+.cover {
+  object-fit: cover;
+  object-position: 0 -1px;
+  width: 400px;
+  height: 300px;
 }
 
 
