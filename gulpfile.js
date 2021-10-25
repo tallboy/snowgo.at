@@ -6,7 +6,7 @@ const uglify = require("gulp-uglify");
 const browserSync = require("browser-sync").create();
 
 // Copy third party libraries from /node_modules into /vendor
-gulp.task("vendor", () => {
+gulp.task("vendor", (cb) => {
   // Bootstrap
   gulp
     .src([
@@ -44,6 +44,8 @@ gulp.task("vendor", () => {
   gulp
     .src(["./node_modules/magnific-popup/dist/*"])
     .pipe(gulp.dest("./vendor/magnific-popup"));
+
+  cb();
 });
 
 // Compile SCSS
