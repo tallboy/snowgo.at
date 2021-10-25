@@ -39,7 +39,7 @@
   });
 
   // Activate scrollspy to add active class to navbar items on scroll
-  $("body").scrollspy({
+  new bootstrap.ScrollSpy(document.body, {
     target: "#mainNav",
     offset: 80,
   });
@@ -64,6 +64,7 @@
     focus: "#username",
     modal: true,
   });
+
   $(document).on("click", ".goats-modal-dismiss", function (e) {
     e.preventDefault();
     $.magnificPopup.close();
