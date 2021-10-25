@@ -20,3 +20,8 @@ After installation, run `npm install` and then run `gulp dev` which will open up
 - `npm run minify-css` minifies the compiled CSS file
 - `npm run minify-js` minifies the themes JS file
 - `npm run copy` copies dependencies from node_modules to the vendor directory
+
+## Deployment
+
+The site is deployed using Github Actions on successful pull requests to `main`.  You should be able to see your changes right away on [https://snowgo.at](https://snowgo.at).  If, for some reason, changes aren't reflected immediately it could be a caching issue with CloudFlare.
+
