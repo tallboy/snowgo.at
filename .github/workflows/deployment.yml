@@ -6,17 +6,20 @@ on:
       - main
 
 jobs:
+  build:
+    uses: tallboy/snowgo.at/.github/workflows/ci.yml@main
+
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: SSH and pull code
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        port: ${{ secrets.SSH_PORT }}
-        script: |
-          cd /usr/share/nginx/html/snowgo.at
-          git pull origin main
+    - name: ssh deploy
+      uses: easingthemes/ssh-deploy@v2.2.11
+      env:
+        REMOTE_HOST: ${{ secrets.SSH_HOST }}
+        REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+        REMOTE_PORT: ${{ secrets.SSH_PORT }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+        SOURCE: "dist/"
+        TARGET: "/usr/share/nginx/html/snowgo.at"
+        ARGS: "-avzr --delete"

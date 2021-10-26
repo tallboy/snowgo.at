@@ -12,10 +12,7 @@ module.exports = {
   },
   rules: {
   },
-  // TODO: This can be cleaned up once the built files
-  // aren't included in the repo. See issue #16
   ignorePatterns: [
-    'vendor/**',
-    '**/*.min.js',
+    'dist/**',
   ],
 };
