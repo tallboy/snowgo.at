@@ -39,7 +39,7 @@ hr.star-light {
 
 hr.star-light:after {
   color: #fff;
-  background-color: #18BC9C;
+  background-color: #087962;
 }
 
 hr.star-dark {
@@ -91,7 +91,7 @@ section h2 {
 }
 
 section a.darklink {
-  color: #2C3E50;
+  color: #000000;
   text-decoration: underline;
   font-weight: 500;
 }
@@ -120,17 +120,18 @@ section a.darklink {
   color: #fff;
 }
 #mainNav .navbar-nav li.nav-item a.nav-link:hover {
-  color: #18BC9C;
+  color: #087962;
 }
 #mainNav .navbar-nav li.nav-item a.nav-link:active, #mainNav .navbar-nav li.nav-item a.nav-link:focus {
   color: #fff;
 }
 #mainNav .navbar-nav li.nav-item a.nav-link.active {
-  color: #18BC9C;
+  color: #087962;
 }
 #mainNav .navbar-toggler {
-  font-size: 80%;
+  font-size: 100%;
   padding: 0.8rem;
+  font-weight: bold;
 }
 
 @media (min-width: 992px) {
@@ -152,11 +153,11 @@ section a.darklink {
   }
   #mainNav .navbar-nav > li.nav-item > a.nav-link.active {
     color: #fff;
-    background: #18BC9C;
+    background: #087962;
   }
   #mainNav .navbar-nav > li.nav-item > a.nav-link.active:active, #mainNav .navbar-nav > li.nav-item > a.nav-link.active:focus, #mainNav .navbar-nav > li.nav-item > a.nav-link.active:hover {
     color: #fff;
-    background: #18BC9C;
+    background: #087962;
   }
 
   #mainNav.navbar-shrink {
@@ -207,7 +208,7 @@ header.masthead h2 {
   -moz-transition: all ease 0.5s;
   transition: all ease 0.5s;
   opacity: 0;
-  background-color: rgba(24, 188, 156, 0.9);
+  background-color: rgba(17, 141, 116, 0.9);
 }
 .goats .goats-item .goats-item-caption:hover {
   opacity: 1;
@@ -245,9 +246,6 @@ header.masthead h2 {
 .goats-modal .goats-modal-dialog h2 {
   font-size: 2rem;
 }
-.goats-modal .goats-modal-dialog .beyonce-irreplaceable {
-  text-align: left;
-}
 @media (min-width: 768px) {
   .goats-modal .goats-modal-dialog {
     min-height: 100vh;
@@ -271,10 +269,10 @@ header.masthead h2 {
 }
 
 a {
-  color: #18BC9C;
+  color: #087962;
 }
 a:focus, a:hover, a:active {
-  color: #128f76;
+  color: #0c5f4f;
 }
 
 .btn {
@@ -282,7 +280,7 @@ a:focus, a:hover, a:active {
 }
 
 .bg-primary {
-  background-color: #18BC9C !important;
+  background-color: #087962 !important;
 }
 
 .bg-secondary {
@@ -290,7 +288,7 @@ a:focus, a:hover, a:active {
 }
 
 .text-primary {
-  color: #18BC9C !important;
+  color: #087962 !important;
 }
 
 .text-secondary {
@@ -298,12 +296,12 @@ a:focus, a:hover, a:active {
 }
 
 .btn-primary {
-  background-color: #18BC9C;
-  border-color: #18BC9C;
+  background-color: #087962;
+  border-color: #087962;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-  background-color: #128f76;
-  border-color: #128f76;
+  background-color: #0c5f4f;
+  border-color: #0c5f4f;
 }
 
 .btn-secondary {
