@@ -41,7 +41,7 @@
   });
 
   // Activate scrollspy to add active class to navbar items on scroll
-  bootstrap.ScrollSpy(document.body, {
+  new bootstrap.ScrollSpy(document.body, {
     target: '#mainNav',
     offset: 80,
   });
