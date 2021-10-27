@@ -19,8 +19,8 @@
         "gulp": "gulp",
         "dev": "gulp dev",
         "css": "gulp css",
-        "minify-css": "gulp minify-css",
-        "gulp minify-js": "gulp minify-js",
+        "minify-css": "gulp css:minify",
+        "gulp minify-js": "gulp js:minify",
         "gulp copy": "gulp copy",
         "lint": "eslint .  --ext .js",
         "lint-fix": "eslint --fix .  --ext .js"
@@ -41,9 +41,11 @@
         "gulp-clean-css": "4.3.0",
         "gulp-filter": "7.0.0",
         "gulp-header": "2.0.9",
+        "gulp-htmlmin": "^5.0.1",
+        "gulp-imagemin": "^7.1.0",
         "gulp-rename": "^2.0.0",
         "gulp-sass": "^5.0.0",
-        "gulp-uglify": "3.0.2",
+        "gulp-terser": "^2.1.0",
         "sass": "^1.43.3"
     }
 }
