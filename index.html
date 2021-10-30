@@ -23,11 +23,11 @@
     <link rel="apple-touch-icon" href="/img/favicons/apple-touch-icon.png" />
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="npm:bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Custom fonts for this template -->
     <link
-      href="vendor/font-awesome/css/font-awesome.min.css"
+      href="npm:font-awesome/css/font-awesome.min.css"
       rel="stylesheet"
       type="text/css"
     />
@@ -44,13 +44,13 @@
 
     <!-- Plugin CSS -->
     <link
-      href="vendor/magnific-popup/magnific-popup.css"
+      href="npm:magnific-popup/dist/magnific-popup.css"
       rel="stylesheet"
       type="text/css"
     />
 
     <!-- Custom styles for this template -->
-    <link href="css/snowgoat.min.css" rel="stylesheet" />
+    <link href="scss/snowgoat.scss" rel="stylesheet" />
   </head>
 
   <body id="page-top">
@@ -821,15 +821,12 @@
       </div>
     </div>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-
-    <!-- Custom scripts for this template -->
-    <script src="js/snowgoat.min.js"></script>
+    <script type="module">
+      // when jQuery is imported as a module, it doesn't define the window
+      // global that is needed for bootstrap to hook in to. Let's do it manually
+      import jQuery from 'jquery';
+      window.jQuery = jQuery;
+    </script>
+    <script type="module" src="js/snowgoat.js"></script>
   </body>
 </html>
