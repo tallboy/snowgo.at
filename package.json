@@ -16,10 +16,10 @@
         "url": "https://github.com/tallboy/snowgo.at"
     },
     "scripts": {
-        "start": "parcel ./index.html --open",
+        "start": "parcel ./index.pug --open",
         "clean": "del dist",
         "prebuild": "npm run clean",
-        "build": "parcel build ./index.html",
+        "build": "parcel build ./index.pug",
         "lint": "eslint .  --ext .js",
         "lint-fix": "eslint --fix .  --ext .js"
     },
@@ -32,6 +32,7 @@
         "magnific-popup": "^1.1.0"
     },
     "devDependencies": {
+        "@parcel/transformer-pug": "^2.0.0",
         "@parcel/transformer-sass": "^2.0.0",
         "@popperjs/core": "^2.10.2",
         "del-cli": "^4.0.1",

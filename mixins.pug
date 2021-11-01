@@ -1,0 +1,27 @@
+- const kebabCase = str => str.replace(/\W/g, '').replace(/\s+/g, '-').toLowerCase();
+- const imagePath = path => `img/goats/${path}`
+
+mixin gridItem(name, image)
+  .col-md-6.col-lg-4
+    a.goats-item.d-block.mx-auto(href='#' + kebabCase(name) alt=name)
+      .goats-item-caption.d-flex.position-absolute.h-100.w-100
+        .goats-item-caption-content.my-auto.w-100.text-center.text-white
+          i.fa.fa-search-plus.fa-3x
+      img.img-fluid.cover(src=imagePath(image) alt=name)
+
+mixin modal(name, image, description)
+  div.goats-modal.mfp-hide(id=kebabCase(name))
+    .goats-modal-dialog.bg-white
+      a.close-button.d-none.d-md-block.goats-modal-dismiss(href='#')
+        i.fa.fa-3x.fa-times
+      .container.text-center
+        .row
+          .col-lg-8.mx-auto
+            h2.text-secondary.text-uppercase.mb-0= name
+            hr.star-dark.mb-5
+            img.img-fluid.mb-5(src=imagePath(image) alt=name)
+            p.mb-5!= description
+            a.btn.btn-primary.btn-lg.rounded-pill.goats-modal-dismiss(href='#')
+              i.fa.fa-close 
+              |
+              | Bye Goat

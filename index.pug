@@ -1,0 +1,142 @@
+// a global `goats` variable exists which contains all the goats. This value is
+// defined in goats.js and is configured in .pugrc.js
+
+include mixins.pug
+
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  meta(name='description' content='ServiceNow Greatest of all Time - SNOW GOATS')
+  meta(name='author' content='Tommy Ryan - Sorry Not Sorry')
+  title SNOW GOAT - ServiceNow Greatest Of All Time
+
+  // Favicon
+  link(rel='shortcut icon' type='image/x-icon' href='/img/favicons/favicon.ico')
+  link(rel='apple-touch-icon' href='/img/favicons/apple-touch-icon.png')
+
+  // Custom fonts for this template
+  link(href='npm:font-awesome/css/font-awesome.min.css' rel='stylesheet' type='text/css')
+  link(href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css')
+  link(href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css')
+
+  // Vendor CSS
+  link(href='npm:bootstrap/dist/css/bootstrap.min.css' rel='stylesheet' type='text/css')
+  link(href='npm:magnific-popup/dist/magnific-popup.css' rel='stylesheet' type='text/css')
+
+  // Custom styles for this template
+  link(href='scss/snowgoat.scss' rel='stylesheet')
+
+// Navigation
+nav#mainNav.navbar.navbar-expand-lg.bg-secondary.fixed-top.text-uppercase
+  .container
+    a.navbar-brand.js-scroll-trigger(href='#page-top') Snow Goat
+    button.navbar-toggler.navbar-toggler-right.text-uppercase.bg-primary.text-white.rounded(type='button' data-toggle='collapse' data-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation')
+      | Menu
+      i.fa.fa-bars
+    #navbarResponsive.collapse.navbar-collapse
+      ul.navbar-nav.ml-auto
+        li.nav-item.mx-0.mx-lg-1
+          a.nav-link.py-3.px-0.px-lg-3.rounded.js-scroll-trigger(href='#goats') Snow GOATs
+        li.nav-item.mx-0.mx-lg-1
+          a.nav-link.py-3.px-0.px-lg-3.rounded.js-scroll-trigger(href='#about') About
+
+// Header
+header.masthead.bg-primary.text-white.text-center
+  .container
+    img.img-fluid.mb-5.d-block.mx-auto(src=imagePath('marty.png') alt='Marty')
+    h1.text-uppercase.mb-0 Snow Goat
+    hr.star-light
+    h2.font-weight-light.mb-0.
+      The Official Online Home of the Original Service Now Greatest Of All
+      Time (SNOW GOAT): #[b Martin Beals]
+
+// Achievements Grid Section
+section#goats.goats
+  .container
+    h2.text-center.text-uppercase.text-secondary.mb-0.
+      SNOW GOATs
+    hr.star-dark.mb-5
+    .row
+      each goat in goats
+        +gridItem(goat.name, goat.image)
+
+// About Section
+section#about.bg-primary.text-white.mb-0
+  .container
+    h2.text-center.text-uppercase.text-white About
+    hr.star-light.mb-5
+    .row
+      .col-lg-4.ml-auto
+        p.lead.
+          The Snow GOAT is an honor bestowed only to the greatest of Snow
+          legends. #[b Martin Beals], current reigning Snow GOAT, combines the
+          strengths of Michael Jordan, Elon Musk, and Bill Murray with none of
+          their flaws.
+      .col-lg-4.ml-auto
+        p.lead.
+          Realizing that there are many other ServiceNowians that are also
+          awesome like Marty we decided to open it up to everyone. Will you
+          get a piece of acrylic? Probably not. Will you be emblazoned on a
+          static website until we forget to renew the domain? Most
+          definitely.
+      .col-lg-4.mr-auto
+        p.lead
+          | Do you have what it takes to be the next Snow GOAT? Want to
+          | nominate a SNOW GOAT?
+          |
+          a.darklink.fw-bold(href='https://github.com/tallboy/snowgo.at') Submit your nominations at GitHub!
+
+// Footer
+footer.footer.text-center
+  .container
+    .row
+      .col-md-4.mb-5.mb-lg-0
+        h3.text-uppercase.mb-4 Location
+        p.lead.mb-0
+          a(href='https://goo.gl/maps/g2FiHrdeL7NXTRRF9' target='_blank' rel='noopener noreferrer').
+            4810 Eastgate Mall Dr #[br]
+            San Diego, CA 92121
+      .col-md-4.mb-5.mb-lg-0
+        h3.text-uppercase.mb-4 Around the Web
+        ul.list-inline.mb-0
+          li.list-inline-item
+            a.btn.btn-outline-light.btn-social.text-center.rounded-circle(href='https://twitter.com/servicenow')
+              i.fa.fa-fw.fa-twitter(title='Twitter')
+          li.list-inline-item
+            a.btn.btn-outline-light.btn-social.text-center.rounded-circle(href='https://www.instagram.com/lifeatnow')
+              i.fa.fa-fw.fa-instagram(title='Instagram')
+          li.list-inline-item
+            a.btn.btn-outline-light.btn-social.text-center.rounded-circle(href='https://www.twitch.tv/servicenowdevprogram')
+              i.fa.fa-fw.fa-twitch(title='Twitch')
+      .col-md-4
+        h3.text-uppercase.mb-4 About SNOWGO.AT
+        p.lead.mb-0
+          | This is a tribute page to some of our favorite people at ServiceNow.
+          br
+          small Fan fiction coming soon&mldr;
+
+.copyright.py-4.text-center.text-white
+  .container
+    small
+      | Copyright &copy; Snow Goat
+      script.
+        document.write(new Date().getFullYear());
+      |
+      | - Made with &hearts; in San Diego
+
+// Scroll to Top Button (Only visible on small and extra-small screen sizes)
+.scroll-to-top.d-lg-none.position-fixed
+  a.js-scroll-trigger.d-block.text-center.text-white.rounded(href='#page-top')
+    i.fa.fa-chevron-up
+
+// goats Modals
+each goat in goats
+  +modal(goat.name, goat.image, goat.description)
+
+script(type='module').
+  // when jQuery is imported as a module, it doesn't define the window
+  // global that is needed for bootstrap to hook in to. Let's do it manually
+  import jQuery from 'jquery';
+  window.jQuery = jQuery;
+script(type='module' src='js/snowgoat.js')
