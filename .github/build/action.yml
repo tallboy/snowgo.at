@@ -6,5 +6,5 @@ runs:
       with:
         node-version: '14'
         cache: 'npm'
-    - run: npm ci && npm run gulp && npm run lint
+    - run: npm ci && npm run build && npm run lint
       shell: bash
