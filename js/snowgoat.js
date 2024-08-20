@@ -1,7 +1,24 @@
 import $ from 'jquery';
 import * as bootstrap from 'bootstrap';
 import 'jquery.easing';
-import 'magnific-popup';
+
+// trigger modal dialogs; preventing background scroll when open
+document.querySelectorAll(".goats-item").forEach((node) => {
+  node.addEventListener("click", (event) => {
+    event.preventDefault();
+    const dialog = document.querySelector(node.getAttribute("href"));
+    dialog.addEventListener(
+      "close",
+      () => {
+        document.body.classList.remove("scroll-lock");
+      },
+      { once: true },
+    );
+
+    dialog.showModal();
+    document.body.classList.add("scroll-lock");
+  });
+});
 
 // Smooth scrolling using jQuery easing
 $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function onClick() {
@@ -61,19 +78,6 @@ const navbarCollapse = () => {
 navbarCollapse();
 // Collapse the navbar when page is scrolled
 $(window).scroll(navbarCollapse);
-
-// Modal popup$(function () {
-$('.goats-item').magnificPopup({
-  type: 'inline',
-  preloader: false,
-  focus: '#username',
-  modal: true,
-});
-
-$(document).on('click', '.goats-modal-dismiss', (e) => {
-  e.preventDefault();
-  $.magnificPopup.close();
-});
 
 // Floating label headings for the contact form
 $(() => {

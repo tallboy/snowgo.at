@@ -79,6 +79,12 @@ section {
   line-height: 2rem;
 }
 
+
+// Prevents vertical scroll
+.scroll-lock {
+  overflow-y: hidden;
+}
+
 // Scroll to Top Button
 .scroll-to-top {
   z-index: 1042;
