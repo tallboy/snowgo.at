@@ -11,7 +11,7 @@
       -moz-transition: all ease 0.5s;
       transition: all ease 0.5s;
       opacity: 0;
-      background-color: fade-out($primary, .1);
+      background-color: fade-out($primary, 0.1);
       &:hover {
         opacity: 1;
       }
@@ -59,7 +59,7 @@
       text-align: left;
     }
   }
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     .goats-modal-dialog {
       padding: 5rem;
       margin: 3rem calc(3rem - 8px);

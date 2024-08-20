@@ -1,6 +1,8 @@
-module.exports = {
+import goats from "./goats.js";
+
+export default {
   locals: {
-    goats: require("./goats.js"),
+    goats,
     slugify: (str) => str.toLowerCase().trim().replaceAll(/\W+/g, "-"),
   },
 };

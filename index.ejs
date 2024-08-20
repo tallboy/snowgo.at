@@ -261,7 +261,10 @@
     <% locals.goats.map(goat => { %>
     <dialog class="goats-modal" id="<%= locals.slugify(goat.name) %>">
       <form class="goats-modal-dialog bg-white" method="dialog">
-        <button type="submit" class="close-button btn btn-link d-none d-md-block goats-modal-dismiss">
+        <button
+          type="submit"
+          class="close-button btn btn-link d-none d-md-block goats-modal-dismiss"
+        >
           <i class="fa fa-3x fa-times"></i>
         </button>
         <div class="container text-center">
@@ -277,7 +280,10 @@
                 alt="<%= goat.name %>"
               />
               <p class="mb-5"><%- goat.description %></p>
-              <button type="submit" class="btn btn-primary btn-lg rounded-pill goats-modal-dismiss">
+              <button
+                type="submit"
+                class="btn btn-primary btn-lg rounded-pill goats-modal-dismiss"
+              >
                 <i class="fa fa-close"></i>
                 Bye Goat
               </button>

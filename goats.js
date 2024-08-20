@@ -2,7 +2,7 @@
 const html = (s) => s;
 const img = (s) => `/img/goats/${s}`;
 
-module.exports = [
+export default [
   {
     name: "Aishma Raghu",
     image: img("aishma.jpeg"),
