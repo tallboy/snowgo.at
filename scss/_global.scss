@@ -26,10 +26,10 @@ hr.star-dark {
 hr.star-light:after,
 hr.star-dark:after {
   position: relative;
-  top: -.8em;
+  top: -0.8em;
   display: inline-block;
   padding: 0 0.25em;
-  content: '\f005';
+  content: "\f005";
   font-family: FontAwesome;
   font-size: 2em;
 }
@@ -79,7 +79,6 @@ section {
   line-height: 2rem;
 }
 
-
 // Prevents vertical scroll
 .scroll-lock {
   overflow-y: hidden;
@@ -115,7 +114,3 @@ section {
   width: 400px;
   height: 300px;
 }
-
-
-
-

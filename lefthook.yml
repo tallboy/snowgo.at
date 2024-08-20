@@ -1,0 +1,17 @@
+# https://github.com/evilmartians/lefthook/blob/master/docs/configuration.md
+# yaml-language-server: $schema=https://json.schemastore.org/lefthook.json
+
+output: summary,success,failure,execution
+
+pre-commit:
+  parallel: true
+  commands:
+    format:
+      run: npm exec --yes -- prettier --ignore-unknown --write {staged_files}
+      stage_fixed: true
+
+pre-push:
+  parallel: true
+  commands:
+    lint:
+      run: npx eslint --no-warn-ignored {push_files}
