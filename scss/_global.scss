@@ -104,11 +104,6 @@ section {
     background-color: fade-out($gray-900, 0.5);
     line-height: 3.1rem;
   }
-
-  // never display this button on large screens
-  @media (min-width: 992px) {
-    display: none;
-  }
 }
 
 // Custom Links
