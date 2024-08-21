@@ -86,15 +86,28 @@ section {
 
 // Scroll to Top Button
 .scroll-to-top {
-  z-index: 1042;
-  right: 1rem;
-  bottom: 1rem;
-  display: none;
+  position: absolute;
+  top: 100px;
+  opacity: 0;
+  transition: opacity 300ms ease-in;
+
+  &.enabled {
+    opacity: 100;
+  }
+
   a {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
     width: 3.5rem;
     height: 3.5rem;
     background-color: fade-out($gray-900, 0.5);
     line-height: 3.1rem;
+  }
+
+  // never display this button on large screens
+  @media (min-width: 992px) {
+    display: none;
   }
 }
 
