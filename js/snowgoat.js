@@ -23,8 +23,11 @@ document.querySelectorAll(".js-scroll-trigger").forEach((node) => {
   node.addEventListener("click", () => {
     const collapsible = new bootstrap.Collapse(
       document.querySelector(".navbar-collapse"),
+      {
+        toggle: false,
+      },
     );
-    collapsible.collapse();
+    collapsible.hide();
   });
 });
 
