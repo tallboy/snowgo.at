@@ -1,6 +1,4 @@
-import $ from "jquery";
 import * as bootstrap from "bootstrap";
-import "jquery.easing";
 
 // trigger modal dialogs; preventing background scroll when open
 document.querySelectorAll(".goats-item").forEach((node) => {
@@ -20,43 +18,17 @@ document.querySelectorAll(".goats-item").forEach((node) => {
   });
 });
 
-// Smooth scrolling using jQuery easing
-$('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function onClick() {
-  if (
-    window.location.pathname.replace(/^\//, "") ===
-      this.pathname.replace(/^\//, "") &&
-    window.location.hostname === this.hostname
-  ) {
-    let target = $(this.hash);
-    target = target.length ? target : $(`[name=${this.hash.slice(1)}]`);
-    if (target.length) {
-      $("html, body").animate(
-        {
-          scrollTop: target.offset().top - 70,
-        },
-        1000,
-        "easeInOutExpo",
-      );
-      return false;
-    }
-  }
-
-  return true;
-});
-
-// Scroll to top button appear
-$(document).scroll(function onScroll() {
-  const scrollDistance = $(this).scrollTop();
-  if (scrollDistance > 100) {
-    $(".scroll-to-top").fadeIn();
-  } else {
-    $(".scroll-to-top").fadeOut();
-  }
-});
-
 // Closes responsive menu when a scroll trigger link is clicked
-$(".js-scroll-trigger").click(() => {
-  $(".navbar-collapse").collapse("hide");
+document.querySelectorAll(".js-scroll-trigger").forEach((node) => {
+  node.addEventListener("click", () => {
+    const collapsible = new bootstrap.Collapse(
+      document.querySelector(".navbar-collapse"),
+      {
+        toggle: false,
+      },
+    );
+    collapsible.hide();
+  });
 });
 
 // Activate scrollspy to add active class to navbar items on scroll
@@ -65,36 +37,26 @@ new bootstrap.ScrollSpy(document.body, {
   offset: 80,
 });
 
-// Collapse Navbar
-const navbarCollapse = () => {
-  if ($("#mainNav").offset().top > 100) {
-    $("#mainNav").addClass("navbar-shrink");
-  } else {
-    $("#mainNav").removeClass("navbar-shrink");
-  }
-};
-// Collapse now if page is not at top
-navbarCollapse();
-// Collapse the navbar when page is scrolled
-$(window).scroll(navbarCollapse);
+// Scroll to top button appear. Note that this relies on CSS
+// `position: absolute; top: $distance`, where $distance is the length
+// the page needs to scroll before the button should be visible
+new IntersectionObserver((entries) => {
+  const [{ isIntersecting, target }] = entries;
+  const shouldShow = !isIntersecting;
+  target.classList.toggle("enabled", shouldShow);
+}).observe(document.querySelector(".scroll-to-top"));
 
-// Floating label headings for the contact form
-$(() => {
-  $("body")
-    .on(
-      "input propertychange",
-      ".floating-label-form-group",
-      function onInput(e) {
-        $(this).toggleClass(
-          "floating-label-form-group-with-value",
-          !!$(e.target).val(),
-        );
-      },
-    )
-    .on("focus", ".floating-label-form-group", function onFocus() {
-      $(this).addClass("floating-label-form-group-with-focus");
-    })
-    .on("blur", ".floating-label-form-group", function onBlur() {
-      $(this).removeClass("floating-label-form-group-with-focus");
-    });
-});
+// Shrink nav when page is not scrolled to top. Note that this relies on CSS
+// `position: sticky; top: -1px` which will trigger this IntersectionObserver
+// as the user scrolls, since it pushes the nav 1px out of the root
+// intersection rect.
+new IntersectionObserver(
+  (entries) => {
+    const [{ intersectionRatio, target }] = entries;
+    const shouldShrink = intersectionRatio < 1;
+    target.classList.toggle("navbar-shrink", shouldShrink);
+  },
+  {
+    threshold: 1,
+  },
+).observe(document.querySelector("#mainNav"));

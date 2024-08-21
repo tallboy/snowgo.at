@@ -46,14 +46,14 @@
     <link href="scss/snowgoat.scss" rel="stylesheet" />
   </head>
 
-  <body id="page-top">
+  <body>
     <!-- Navigation -->
     <nav
-      class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase"
+      class="navbar navbar-expand-lg bg-secondary sticky-top text-uppercase"
       id="mainNav"
     >
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Snow Goat</a>
+        <a class="navbar-brand js-scroll-trigger" href="#">Snow Goat</a>
         <button
           class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded"
           type="button"
@@ -129,9 +129,19 @@
                 </div>
               </div>
               <picture>
-                <source srcset="<%= goat.image %>?as=avif&width=400" type="image/avif" />
-                <source srcset="<%= goat.image %>?as=webp&width=400" type="image/webp" />
-                <img class="img-fluid cover" src="<%= goat.image %>?as=jpeg&width=400" alt="<%= goat.name %>" />
+                <source
+                  srcset="<%= goat.image %>?as=avif&width=400"
+                  type="image/avif"
+                />
+                <source
+                  srcset="<%= goat.image %>?as=webp&width=400"
+                  type="image/webp"
+                />
+                <img
+                  class="img-fluid cover"
+                  src="<%= goat.image %>?as=jpeg&width=400"
+                  alt="<%= goat.name %>"
+                />
               </picture>
             </a>
           </div>
@@ -248,10 +258,10 @@
     </div>
 
     <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-    <div class="scroll-to-top d-lg-none position-fixed">
+    <div class="scroll-to-top d-lg-none">
       <a
         class="js-scroll-trigger d-block text-center text-white rounded"
-        href="#page-top"
+        href="#"
       >
         <i class="fa fa-chevron-up"></i>
       </a>
@@ -277,7 +287,11 @@
               <picture>
                 <source srcset="<%= goat.image %>?as=avif" type="image/avif" />
                 <source srcset="<%= goat.image %>?as=webp" type="image/webp" />
-                <img class="img-fluid mb-5" src="<%= goat.image %>?as=jpeg" alt="<%= goat.name %>" />
+                <img
+                  class="img-fluid mb-5"
+                  src="<%= goat.image %>?as=jpeg"
+                  alt="<%= goat.name %>"
+                />
               </picture>
               <p class="mb-5"><%- goat.description %></p>
               <button
@@ -294,12 +308,6 @@
     </dialog>
     <% }) %>
 
-    <script type="module">
-      // when jQuery is imported as a module, it doesn't define the window
-      // global that is needed for bootstrap to hook in to. Let's do it manually
-      import jQuery from "jquery";
-      window.jQuery = jQuery;
-    </script>
     <script type="module" src="js/snowgoat.js"></script>
   </body>
 </html>
