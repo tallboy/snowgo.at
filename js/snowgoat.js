@@ -20,30 +20,6 @@ document.querySelectorAll(".goats-item").forEach((node) => {
   });
 });
 
-// Smooth scrolling using jQuery easing
-$('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function onClick() {
-  if (
-    window.location.pathname.replace(/^\//, "") ===
-      this.pathname.replace(/^\//, "") &&
-    window.location.hostname === this.hostname
-  ) {
-    let target = $(this.hash);
-    target = target.length ? target : $(`[name=${this.hash.slice(1)}]`);
-    if (target.length) {
-      $("html, body").animate(
-        {
-          scrollTop: target.offset().top - 70,
-        },
-        1000,
-        "easeInOutExpo",
-      );
-      return false;
-    }
-  }
-
-  return true;
-});
-
 // Scroll to top button appear
 $(document).scroll(function onScroll() {
   const scrollDistance = $(this).scrollTop();
@@ -77,24 +53,3 @@ const navbarCollapse = () => {
 navbarCollapse();
 // Collapse the navbar when page is scrolled
 $(window).scroll(navbarCollapse);
-
-// Floating label headings for the contact form
-$(() => {
-  $("body")
-    .on(
-      "input propertychange",
-      ".floating-label-form-group",
-      function onInput(e) {
-        $(this).toggleClass(
-          "floating-label-form-group-with-value",
-          !!$(e.target).val(),
-        );
-      },
-    )
-    .on("focus", ".floating-label-form-group", function onFocus() {
-      $(this).addClass("floating-label-form-group-with-focus");
-    })
-    .on("blur", ".floating-label-form-group", function onBlur() {
-      $(this).removeClass("floating-label-form-group-with-focus");
-    });
-});
