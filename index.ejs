@@ -57,7 +57,7 @@
           aria-label="Toggle navigation"
         >
           Menu
-          <i class="fa fa-bars"></i>
+          <i class="fa fa-bars" aria-hidden="true"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
@@ -83,11 +83,15 @@
     <!-- Header -->
     <header class="masthead bg-primary text-white text-center">
       <div class="container">
-        <img
-          class="img-fluid mb-5 d-block mx-auto"
-          src="img/goats/marty.png"
-          alt="Marty"
-        />
+        <picture>
+          <source srcset="img/goats/marty.png?as=avif" type="image/avif" />
+          <source srcset="img/goats/marty.png?as=webp" type="image/webp" />
+          <img
+            class="img-fluid mb-5 d-block mx-auto"
+            src="img/goats/marty.png?as=jpeg"
+            alt="Marty"
+          />
+        </picture>
         <h1 class="text-uppercase mb-0">Snow Goat</h1>
         <hr class="star-light" />
         <h2 class="font-weight-light mb-0">
@@ -253,6 +257,7 @@
         class="js-scroll-trigger d-block text-center text-white rounded"
         href="#"
       >
+        <span class="sr-only">Scroll to Top</span>
         <i class="fa fa-chevron-up"></i>
       </a>
     </div>
