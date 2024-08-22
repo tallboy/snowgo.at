@@ -14,5 +14,5 @@
   --secondary: #000000;
 
   --font-body: 1em "Lato";
-  --font-heading: 1em "Montserrat" 700;
+  --font-heading: 700 1em "Montserrat";
 }

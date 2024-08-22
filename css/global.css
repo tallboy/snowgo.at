@@ -92,7 +92,7 @@ section {
   transition: opacity 300ms ease-in;
 
   &.enabled {
-    opacity: 100;
+    opacity: 0.6;
   }
 
   a {
@@ -101,7 +101,7 @@ section {
     right: 1rem;
     width: 3.5rem;
     height: 3.5rem;
-    background-color: color-mix(in srgb, var(--gray-600), black);
+    background-color: var(--gray-600);
     line-height: 3.1rem;
   }
 }
@@ -112,6 +112,12 @@ section {
     color: var(--secondary);
     text-decoration: underline;
     font-weight: 500;
+
+    &:focus,
+    &:hover,
+    &:active {
+      color: var(--secondary);
+    }
   }
 }
 
