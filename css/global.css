@@ -1,6 +1,6 @@
-// Typography
+/* Typography */
 body {
-  @include body-font;
+  font: var(--font-body);
 }
 
 h1,
@@ -9,10 +9,10 @@ h3,
 h4,
 h5,
 h6 {
-  @include heading-font;
+  font: var(--font-heading);
 }
 
-// Custom Horizontal Rule with Star Icon
+/* Custom Horizontal Rule with Star Icon */
 hr.star-light,
 hr.star-dark {
   max-width: 20rem;
@@ -35,22 +35,22 @@ hr.star-dark:after {
 }
 
 hr.star-light {
-  border-color: $white;
+  border-color: var(--white);
 }
 hr.star-light:after {
-  color: $white;
-  background-color: $primary;
+  color: var(--white);
+  background-color: var(--primary);
 }
 
 hr.star-dark {
-  border-color: $secondary;
+  border-color: var(--secondary);
 }
 hr.star-dark:after {
-  color: $secondary;
+  color: var(--secondary);
   background-color: white;
 }
 
-// Section Padding Settings
+/* Section Padding Settings */
 section {
   padding: 6rem 0;
   h2 {
@@ -65,13 +65,13 @@ section {
   }
 }
 
-// Custom Button Size
+/* Custom Button Size */
 .btn-xl {
   padding: 1rem 1.75rem;
   font-size: 1.25rem;
 }
 
-// Custom Rounded Social Button
+/* Custom Rounded Social Button */
 .btn-social {
   width: 3.25rem;
   height: 3.25rem;
@@ -79,12 +79,12 @@ section {
   line-height: 2rem;
 }
 
-// Prevents vertical scroll
+/* Prevents vertical scroll */
 .scroll-lock {
   overflow-y: hidden;
 }
 
-// Scroll to Top Button
+/* Scroll to Top Button */
 .scroll-to-top {
   position: absolute;
   top: 100px;
@@ -92,7 +92,7 @@ section {
   transition: opacity 300ms ease-in;
 
   &.enabled {
-    opacity: 100;
+    opacity: 0.6;
   }
 
   a {
@@ -101,21 +101,27 @@ section {
     right: 1rem;
     width: 3.5rem;
     height: 3.5rem;
-    background-color: fade-out($gray-600, 0.5);
+    background-color: var(--gray-600);
     line-height: 3.1rem;
   }
 }
 
-// Custom Links
+/* Custom Links */
 section {
   a.darklink {
-    color: $secondary;
+    color: var(--secondary);
     text-decoration: underline;
     font-weight: 500;
+
+    &:focus,
+    &:hover,
+    &:active {
+      color: var(--secondary);
+    }
   }
 }
 
-// images
+/* images */
 .cover {
   object-fit: cover;
   object-position: 0 -1px;

@@ -1,0 +1,18 @@
+/* Variables */
+
+:root {
+  --white: #fff;
+  --gray-100: #e7e9eb;
+  --gray-200: #e6e9eb;
+  --gray-300: #cbcbcb;
+  --gray-400: #666666;
+  --gray-500: #4a4a4a;
+  --gray-600: #2e2e2e;
+  --black: #000;
+
+  --primary: #1f8476;
+  --secondary: #000000;
+
+  --font-body: 1em "Lato";
+  --font-heading: 700 1em "Montserrat";
+}

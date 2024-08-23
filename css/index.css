@@ -1,0 +1,8 @@
+@import "npm:bootstrap/dist/css/bootstrap.min.css";
+@import "variables.css";
+@import "global.css";
+@import "navbar.css";
+@import "masthead.css";
+@import "goats.css";
+@import "footer.css";
+@import "bootstrap-overrides.css";

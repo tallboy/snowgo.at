@@ -1,0 +1,52 @@
+/* Bootstrap overrides for this template */
+a,
+.btn-link {
+  color: var(--primary);
+  &:focus,
+  &:hover,
+  &:active {
+    color: color-mix(in srgb, var(--primary), black 10%);
+  }
+}
+
+.btn {
+  border-width: 2px;
+}
+
+.bg-primary {
+  background-color: var(--primary) !important;
+}
+
+.bg-secondary {
+  background-color: var(--secondary) !important;
+}
+
+.text-primary {
+  color: var(--primary) !important;
+}
+
+.text-secondary {
+  color: var(--secondary) !important;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: color-mix(in srgb, var(--primary), black 10%);
+    border-color: color-mix(in srgb, var(--primary), black 10%);
+  }
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: color-mix(in srgb, var(--secondary), black 10%);
+    border-color: color-mix(in srgb, var(--secondary), black 10%);
+  }
+}

@@ -1,27 +1,27 @@
-// Styling for the navbar
+/*  Styling for the navbar */
 #mainNav {
   top: -1px;
   padding-top: calc(1rem + 1px);
   padding-bottom: 1rem;
-  @include heading-font;
+  font: var(--font-heading);
   .navbar-brand {
-    color: $white;
+    color: var(--white);
   }
   .navbar-nav {
     margin-top: 1rem;
     letter-spacing: 0.0625rem;
     li.nav-item {
       a.nav-link {
-        color: $white;
+        color: var(--white);
         &:hover {
-          color: $primary;
+          color: var(--primary);
         }
         &:active,
         &:focus {
-          color: $white;
+          color: var(--white);
         }
         &.active {
-          color: $primary;
+          color: var(--primary);
         }
       }
     }
@@ -54,13 +54,13 @@
       margin-top: 0;
     }
     .navbar-nav > li.nav-item > a.nav-link.active {
-      color: $white;
-      background: $primary;
+      color: var(--white);
+      background: var(--primary);
       &:active,
       &:focus,
       &:hover {
-        color: $white;
-        background: $primary;
+        color: var(--white);
+        background: var(--primary);
       }
     }
   }
