@@ -84,12 +84,12 @@
     <header class="masthead bg-primary text-white text-center">
       <div class="container">
         <picture>
-          <source srcset="img/goats/marty.png?as=avif" type="image/avif" />
-          <source srcset="img/goats/marty.png?as=webp" type="image/webp" />
+          <!-- Removed query parameters for Cloudflare compatibility -->
           <img
             class="img-fluid mb-5 d-block mx-auto"
-            src="img/goats/marty.png?as=jpeg"
+            src="img/goats/marty.png"
             alt="Marty"
+            loading="lazy"
           />
         </picture>
         <h1 class="text-uppercase mb-0">Snow Goat</h1>
@@ -126,18 +126,12 @@
                 </div>
               </div>
               <picture>
-                <source
-                  srcset="<%= goat.image %>?as=avif&width=400"
-                  type="image/avif"
-                />
-                <source
-                  srcset="<%= goat.image %>?as=webp&width=400"
-                  type="image/webp"
-                />
+                <!-- Removed query parameters for Cloudflare compatibility -->
                 <img
                   class="img-fluid cover"
-                  src="<%= goat.image %>?as=jpeg&width=400"
+                  src="<%= goat.image %>"
                   alt="<%= goat.name %>"
+                  loading="lazy"
                 />
               </picture>
             </a>
@@ -280,12 +274,12 @@
               </h2>
               <hr class="star-dark mb-5" />
               <picture>
-                <source srcset="<%= goat.image %>?as=avif" type="image/avif" />
-                <source srcset="<%= goat.image %>?as=webp" type="image/webp" />
+                <!-- Removed query parameters for Cloudflare compatibility -->
                 <img
                   class="img-fluid mb-5"
-                  src="<%= goat.image %>?as=jpeg"
+                  src="<%= goat.image %>"
                   alt="<%= goat.name %>"
+                  loading="lazy"
                 />
               </picture>
               <p class="mb-5"><%- goat.description %></p>
