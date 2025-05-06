@@ -20,10 +20,16 @@
     "start": "npx serve .",
     "clean": "rm -rf dist",
     "cloudflare-build": "npm run clean && node build-for-cloudflare.js",
-    "test-cloudflare": "node test-cloudflare-build.js"
+    "test-cloudflare": "node test-cloudflare-build.js",
+    "fix-package-lock": "node fix-package-lock.js"
   },
-  "dependencies": {},
   "devDependencies": {
+    "glob": "^10.3.10",
+    "imagemin": "^9.0.1",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-jpegtran": "^8.0.0",
+    "imagemin-pngquant": "^10.0.0",
+    "imagemin-svgo": "^11.0.1",
     "serve": "^14.2.1"
   },
   "engines": {

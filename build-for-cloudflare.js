@@ -37,9 +37,8 @@ try {
   execSync(`mkdir -p ${path.join(__dirname, 'dist', 'js')}`);
   execSync(`cp -R ${path.join(__dirname, 'js')}/* ${path.join(__dirname, 'dist', 'js')}`);
   
-  console.log('Copying image files...');
-  execSync(`mkdir -p ${path.join(__dirname, 'dist', 'img')}`);
-  execSync(`cp -R ${path.join(__dirname, 'img')}/* ${path.join(__dirname, 'dist', 'img')}`);
+  console.log('Optimizing and copying image files...');
+  execSync(`node optimize-images.js`);
 } catch (error) {
   console.error('Error copying files:', error);
 }
