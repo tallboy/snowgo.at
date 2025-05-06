@@ -1,31 +1,75 @@
 /* Styling for the goats section */
 .goats {
   margin-bottom: -15px;
-  .goats-item {
-    position: relative;
-    display: block;
-    max-width: 25rem;
-    margin-bottom: 15px;
-    .goats-item-caption {
-      transition: all ease 0.5s;
-      opacity: 0;
-      background-color: var(--primary);
-      &:hover {
-        opacity: 0.9;
-      }
-      .goats-item-caption-content {
-        font-size: 1.5rem;
-      }
-    }
-  }
-  @media (min-width: 576px) {
+  background-color: var(--white);
+}
+
+.goats-item {
+  position: relative;
+  display: block;
+  max-width: 25rem;
+  margin-bottom: 15px;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  background-color: white;
+}
+
+.goats-item:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+}
+
+.goats-item-caption {
+  transition: all ease 0.3s;
+  opacity: 0;
+  background: linear-gradient(135deg, var(--wasabi-blue-light) 0%, var(--wasabi-blue) 100%);
+  border-radius: var(--border-radius);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.goats-item-caption:hover {
+  opacity: 0.9;
+}
+
+.goats-item-caption-content {
+  font-size: 1.5rem;
+}
+
+.goats-item-caption-content i {
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+}
+
+.goats-item-caption-content:hover i {
+  transform: scale(1.2);
+}
+
+@media (min-width: 576px) {
+  .goats {
     margin-bottom: -30px;
-    .goats-item {
-      margin-bottom: 30px;
-    }
+  }
+  .goats-item {
+    margin-bottom: 30px;
   }
 }
 
+/* Section heading styling */
+.goats h2 {
+  color: var(--wasabi-blue);
+  position: relative;
+  display: inline-block;
+}
+
+/* Modal Styling */
 .goats-modal {
   border: 0;
   padding: 0;
@@ -33,37 +77,115 @@
   max-width: 100vw;
   height: 100vh;
   max-height: 100vh;
-  background-color: rgb(0 0 0 / 75%);
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(5px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
 
+/* Remove default dialog styles */
+dialog {
+  background: transparent;
+  color: inherit;
+  border: none;
+}
+
+/* Hide the dialog when it's not open */
+dialog:not([open]) {
+  display: none;
+}
+
+/* Style the dialog when it's open */
+dialog[open] {
+  display: flex;
+}
+
+.goats-modal-dialog {
+  padding: 3rem 1rem;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  animation: modal-in 0.4s ease-out;
+  border: none;
+  max-width: 800px;
+  width: 90%;
+  background-color: white;
+}
+
+.goats-modal-dialog .close-button {
+  background: none;
+  border: 0;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: #003452;
+  transition: all 0.3s ease;
+  z-index: 100;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: block !important;
+}
+
+.goats-modal-dialog .close-button:hover {
+  color: var(--wasabi-green);
+  transform: rotate(90deg);
+}
+
+.goats-modal-dialog .close-button i {
+  line-height: 38px;
+  pointer-events: none;
+}
+
+.goats-modal-dialog h2 {
+  font-size: 2rem;
+  color: var(--wasabi-blue);
+}
+
+.goats-modal-dialog img {
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+.goats-modal-dialog .btn-primary {
+  margin-top: 1rem;
+  cursor: pointer;
+  z-index: 100;
+  position: relative;
+}
+
+.goats-modal-dialog .beyonce-irreplaceable {
+  text-align: left;
+}
+
+@media (min-width: 768px) {
   .goats-modal-dialog {
-    padding: 3rem 1rem;
-    margin: 1rem calc(1rem - 8px);
-    position: relative;
-    z-index: 2;
-    .close-button {
-      background: none;
-      border: 0;
-      position: absolute;
-      top: 2rem;
-      right: 2rem;
-      i {
-        line-height: 38px;
-      }
-    }
-    h2 {
-      font-size: 2rem;
-    }
-    .beyonce-irreplaceable {
-      text-align: left;
-    }
+    padding: 5rem;
+    margin: 0;
   }
-  @media (min-width: 768px) {
-    .goats-modal-dialog {
-      padding: 5rem;
-      margin: 3rem calc(3rem - 8px);
-      h2 {
-        font-size: 3rem;
-      }
-    }
+  
+  .goats-modal-dialog h2 {
+    font-size: 3rem;
+  }
+}
+
+@keyframes modal-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }

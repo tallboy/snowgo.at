@@ -2,15 +2,27 @@
 a,
 .btn-link {
   color: var(--primary);
+  transition: color 0.2s ease;
   &:focus,
   &:hover,
   &:active {
-    color: color-mix(in srgb, var(--primary), black 10%);
+    color: var(--wasabi-blue-light);
   }
 }
 
 .btn {
   border-width: 2px;
+  border-radius: 50px; /* Pill-shaped buttons */
+  padding: 0.5rem 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  font-weight: 600;
+  text-transform: none; /* Remove uppercase text */
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
 }
 
 .bg-primary {
@@ -35,8 +47,8 @@ a,
   &:hover,
   &:focus,
   &:active {
-    background-color: color-mix(in srgb, var(--primary), black 10%);
-    border-color: color-mix(in srgb, var(--primary), black 10%);
+    background-color: var(--wasabi-blue-light);
+    border-color: var(--wasabi-blue-light);
   }
 }
 
@@ -46,7 +58,53 @@ a,
   &:hover,
   &:focus,
   &:active {
-    background-color: color-mix(in srgb, var(--secondary), black 10%);
-    border-color: color-mix(in srgb, var(--secondary), black 10%);
+    background-color: var(--wasabi-green-light);
+    border-color: var(--wasabi-green-light);
   }
+}
+
+/* Additional accent button */
+.btn-accent {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: color-mix(in srgb, var(--accent), black 10%);
+    border-color: color-mix(in srgb, var(--accent), black 10%);
+    color: var(--white);
+  }
+}
+
+/* Card styling */
+.card {
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  border: none;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow);
+}
+
+/* Navbar modernization */
+.navbar {
+  box-shadow: var(--shadow);
+}
+
+/* Form controls */
+.form-control {
+  border-radius: var(--border-radius);
+  border: 1px solid var(--gray-300);
+  padding: 0.5rem 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.form-control:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 0.2rem rgba(46, 46, 155, 0.25);
 }

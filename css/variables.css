@@ -1,18 +1,44 @@
-/* Variables */
+/* Variables - ServiceNow Wasabi Color Palette */
 
 :root {
+  /* Base colors */
   --white: #fff;
-  --gray-100: #e7e9eb;
-  --gray-200: #e6e9eb;
-  --gray-300: #cbcbcb;
-  --gray-400: #666666;
-  --gray-500: #4a4a4a;
-  --gray-600: #2e2e2e;
+  --gray-100: #f8f9fa;
+  --gray-200: #e9ecef;
+  --gray-300: #dee2e6;
+  --gray-400: #ced4da;
+  --gray-500: #adb5bd;
+  --gray-600: #6c757d;
+  --gray-700: #495057;
+  --gray-800: #343a40;
+  --gray-900: #212529;
   --black: #000;
 
-  --primary: #1f8476;
-  --secondary: #000000;
+  /* ServiceNow wasabi palette */
+  --wasabi-blue: #003452;       /* Primary blue - dark blue from ServiceNow homepage */
+  --wasabi-blue-light: #004b73; /* Lighter blue for hover states */
+  --wasabi-blue-dark: #002a42;  /* Darker blue for active states */
+  --wasabi-green: #62da37;      /* Primary green - bright green from ServiceNow homepage */
+  --wasabi-green-light: #7de455; /* Lighter green for hover states */
+  --wasabi-green-dark: #4fb82c;  /* Darker green for active states */
+  --wasabi-teal: #00a989;       /* Accent teal color */
+  
+  /* Theme colors */
+  --primary: var(--wasabi-blue);
+  --secondary: var(--wasabi-green);
+  --accent: var(--wasabi-teal);
+  
+  /* Typography */
+  --font-body: 1em "Lato", sans-serif;
+  --font-heading: 700 1em "Montserrat", sans-serif;
 
-  --font-body: 1em "Lato";
-  --font-heading: 700 1em "Montserrat";
+  /* Shadows */
+  --shadow-sm: 0 .125rem .25rem rgba(0, 0, 0, .075);
+  --shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+  --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, .175);
+
+  /* Border radius */
+  --border-radius: 0.375rem;
+  --border-radius-lg: 0.5rem;
+  --border-radius-sm: 0.25rem;
 }
