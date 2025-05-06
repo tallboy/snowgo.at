@@ -1,0 +1,13 @@
+name = "snow-goat"
+main = "workers-site/index.js"
+compatibility_date = "2025-05-06"
+workers_dev = true
+
+[site]
+bucket = "./dist"
+
+[build]
+command = "npm run cloudflare-build"
+
+[env.production]
+name = "snow-goat-prod"

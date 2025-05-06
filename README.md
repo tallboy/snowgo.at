@@ -28,3 +28,44 @@ lefthook install
 ## Deployment
 
 The site is deployed using Github Actions on successful pull requests to `main`. You should be able to see your changes right away on [https://snowgo.at](https://snowgo.at). If, for some reason, changes aren't reflected immediately it could be a caching issue with CloudFlare.
+
+### Cloudflare Workers Deployment
+
+The site can also be deployed using Cloudflare Workers:
+
+#### Manual Deployment
+
+1. Install Wrangler CLI:
+   ```bash
+   npm install -g wrangler
+   ```
+
+2. Authenticate with Cloudflare:
+   ```bash
+   wrangler login
+   ```
+
+3. Update the `wrangler.toml` file with your Cloudflare account details:
+   - `account_id`: Your Cloudflare account ID
+   - `zone_id`: The zone ID for your domain (if deploying to a custom domain)
+   - `route`: The route pattern for your site (if deploying to a custom domain)
+
+4. Build and deploy the site:
+   ```bash
+   npm run cloudflare-build
+   wrangler publish
+   ```
+
+#### Automated Deployment with GitHub Actions
+
+The project includes a GitHub Actions workflow that automatically builds and deploys the site to Cloudflare Workers when changes are pushed to the `main` branch.
+
+To set up automated deployment:
+
+1. Add the following secrets to your GitHub repository:
+   - `CLOUDFLARE_API_TOKEN`: Your Cloudflare API token
+   - `CLOUDFLARE_ACCOUNT_ID`: Your Cloudflare account ID
+
+2. Push changes to the `main` branch, and the site will be automatically deployed to Cloudflare Workers.
+
+For more details, see the [workers-site/README.md](workers-site/README.md) file.

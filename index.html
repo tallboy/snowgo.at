@@ -29,11 +29,12 @@
       href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-    <link
-      href="npm:@fortawesome/fontawesome-free/css/all.min.css"
-      rel="stylesheet"
-      type="text/css"
-    />
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/index.css" rel="stylesheet" />
@@ -109,40 +110,8 @@
           SNOW GOATs
         </h2>
         <hr class="star-dark mb-5" />
-        <div class="row">
-          <% locals.goats.map(goat => { %>
-          <div class="col-md-6 col-lg-4">
-            <a
-              class="goats-item d-block mx-auto"
-              href="#<%= locals.slugify(goat.name) %>"
-            >
-              <div
-                class="goats-item-caption d-flex position-absolute h-100 w-100"
-              >
-                <div
-                  class="goats-item-caption-content my-auto w-100 text-center text-white"
-                >
-                  <i class="fas fa-search-plus fa-3x"></i>
-                </div>
-              </div>
-              <picture>
-                <source
-                  srcset="<%= goat.image %>?as=avif&width=400"
-                  type="image/avif"
-                />
-                <source
-                  srcset="<%= goat.image %>?as=webp&width=400"
-                  type="image/webp"
-                />
-                <img
-                  class="img-fluid cover"
-                  src="<%= goat.image %>?as=jpeg&width=400"
-                  alt="<%= goat.name %>"
-                />
-              </picture>
-            </a>
-          </div>
-          <% }) %>
+        <div class="row" id="goats-container">
+          <!-- Goats will be inserted here by JavaScript -->
         </div>
       </div>
     </section>
@@ -245,7 +214,7 @@
     <div class="copyright py-4 text-center text-white">
       <div class="container">
         <small
-          >Copyright &copy; Snow Goat <%= new Date().getFullYear(); %> - Made
+          >Copyright &copy; Snow Goat <span id="current-year"></span> - Made
           with &hearts; in San Diego</small
         >
       </div>
@@ -262,47 +231,16 @@
       </a>
     </div>
 
-    <!-- goats Modals -->
-    <% locals.goats.map(goat => { %>
-    <dialog class="goats-modal" id="<%= locals.slugify(goat.name) %>">
-      <form class="goats-modal-dialog bg-white" method="dialog">
-        <button
-          type="submit"
-          class="close-button btn btn-link d-none d-md-block goats-modal-dismiss"
-        >
-          <i class="fas fa-3x fa-times"></i>
-        </button>
-        <div class="container text-center">
-          <div class="row">
-            <div class="col-lg-8 mx-auto">
-              <h2 class="text-secondary text-uppercase mb-0">
-                <%= goat.name %>
-              </h2>
-              <hr class="star-dark mb-5" />
-              <picture>
-                <source srcset="<%= goat.image %>?as=avif" type="image/avif" />
-                <source srcset="<%= goat.image %>?as=webp" type="image/webp" />
-                <img
-                  class="img-fluid mb-5"
-                  src="<%= goat.image %>?as=jpeg"
-                  alt="<%= goat.name %>"
-                />
-              </picture>
-              <p class="mb-5"><%- goat.description %></p>
-              <button
-                type="submit"
-                class="btn btn-primary btn-lg rounded-pill goats-modal-dismiss"
-              >
-                <i class="fas fa-xmark"></i>
-                Bye Goat
-              </button>
-            </div>
-          </div>
-        </div>
-      </form>
-    </dialog>
-    <% }) %>
+    <!-- Goat Modals Container -->
+    <div id="goat-modals-container">
+      <!-- Goat modals will be inserted here by JavaScript -->
+    </div>
 
-    <script type="module" src="js/index.js"></script>
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="js/goats-data.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>

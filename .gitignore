@@ -1,6 +1,8 @@
 node_modules
 dist
 .parcel-cache/
+workers-site/node_modules
+.wrangler/
 
 # General
 .DS_Store

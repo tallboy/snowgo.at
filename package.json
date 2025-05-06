@@ -17,24 +17,16 @@
     "url": "https://github.com/tallboy/snowgo.at"
   },
   "scripts": {
-    "start": "parcel ./index.ejs --open",
-    "clean": "del dist",
-    "prebuild": "npm run clean",
-    "build": "parcel build ./index.ejs",
-    "lint": "eslint .",
-    "lint-fix": "eslint --fix ."
+    "start": "npx serve .",
+    "clean": "rm -rf dist",
+    "cloudflare-build": "npm run clean && node build-for-cloudflare.js",
+    "test-cloudflare": "node test-cloudflare-build.js"
   },
-  "browserslist": "defaults",
-  "dependencies": {
-    "bootstrap": "5.1.3",
-    "font-awesome": "4.7.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "del-cli": "^5.1.0",
-    "eslint": "^9.9.0",
-    "parcel": "^2.12.0",
-    "parcel-transformer-ejs": "^1.0.1",
-    "prettier": "^3.3.3",
-    "sharp": "^0.31.3"
+    "serve": "^14.2.1"
+  },
+  "engines": {
+    "node": ">=16.13.0"
   }
 }
