@@ -12,17 +12,13 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.goats-item').forEach(item => {
     item.addEventListener('click', function(e) {
       e.preventDefault();
-      const targetId = this.getAttribute('href'); // This already includes the #
-      console.log('Opening modal:', targetId);
+      const targetId = this.getAttribute('href');
       const targetModal = document.querySelector(targetId);
       
       // Show the modal
       if (targetModal && targetModal.tagName === 'DIALOG') {
-        console.log('Dialog found, showing it');
         targetModal.showModal();
         document.body.classList.add('scroll-lock');
-      } else {
-        console.error('Dialog not found or not a dialog element:', targetId);
       }
     });
   });
@@ -32,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
     button.addEventListener('click', function() {
       const dialog = this.closest('dialog');
       if (dialog) {
-        console.log('Closing dialog:', dialog.id);
         dialog.close();
         document.body.classList.remove('scroll-lock');
       }

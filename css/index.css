@@ -1,4 +1,4 @@
-@import "npm:bootstrap/dist/css/bootstrap.min.css";
+/* Main CSS imports */
 @import "variables.css";
 @import "global.css";
 @import "navbar.css";

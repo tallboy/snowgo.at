@@ -33,9 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
         </div>
         <picture>
-          <source srcset="${goat.image}?as=avif&width=400" type="image/avif" />
-          <source srcset="${goat.image}?as=webp&width=400" type="image/webp" />
-          <img class="img-fluid cover" src="${goat.image}?as=jpeg&width=400" alt="${goat.name}" />
+          <!-- Removed query parameters for Cloudflare compatibility -->
+          <img class="img-fluid cover" src="${goat.image}" alt="${goat.name}" loading="lazy" />
         </picture>
       </a>
     `;
@@ -58,9 +57,8 @@ document.addEventListener('DOMContentLoaded', function() {
               <h2 class="text-secondary text-uppercase mb-0">${goat.name}</h2>
               <hr class="star-dark mb-5" />
               <picture>
-                <source srcset="${goat.image}?as=avif" type="image/avif" />
-                <source srcset="${goat.image}?as=webp" type="image/webp" />
-                <img class="img-fluid mb-5" src="${goat.image}?as=jpeg" alt="${goat.name}" />
+                <!-- Removed query parameters for Cloudflare compatibility -->
+                <img class="img-fluid mb-5" src="${goat.image}" alt="${goat.name}" loading="lazy" />
               </picture>
               <p class="mb-5">${goat.description}</p>
               <button type="submit" class="btn btn-primary btn-lg rounded-pill goats-modal-dismiss">

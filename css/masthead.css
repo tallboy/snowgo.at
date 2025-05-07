@@ -39,7 +39,17 @@ header.masthead {
     opacity: 0.9;
   }
   
-  img {
+  .masthead-avatar-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  
+  .masthead-avatar {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
     border-radius: 50%;
     box-shadow: var(--shadow);
     border: 5px solid rgba(255, 255, 255, 0.2);
@@ -68,8 +78,9 @@ header.masthead {
       margin: 0 auto;
     }
     
-    img {
-      max-width: 250px;
+    .masthead-avatar {
+      width: 250px;
+      height: 250px;
     }
   }
 }

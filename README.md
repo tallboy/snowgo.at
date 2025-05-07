@@ -2,6 +2,48 @@
 
 Fan site for ServiceNow's G(reatest) O(f) A(ll) T(ime). Submit Pull Requests to nominate a Snow GOAT. We're also Hacktoberfest 2021 official.
 
+## Adding a New GOAT
+
+### Automated Method (Recommended)
+
+We've created a script to automate the process of adding a new goat:
+
+```bash
+npm run add-goat -- --name "Your Goat's Name" --image path/to/image.jpg --description "Your goat's description here"
+```
+
+The script will:
+1. Copy the image to the correct directory with a standardized filename
+2. Update the goats.js file with the new entry
+3. Format everything correctly
+
+You can use HTML in your description by enclosing it in quotes:
+
+```bash
+npm run add-goat -- --name "Jane Doe" --image ~/Pictures/jane.jpg --description "Jane is amazing! <br><br>She also has <b>bold</b> achievements."
+```
+
+### Manual Method
+
+If you prefer to add a goat manually, follow these steps:
+
+1. Add your goat's photo to the `/img/goats/` directory (JPEG, PNG, or other web-friendly format)
+2. Add your goat's information to the `/goats.js` file
+3. Follow the existing format:
+   ```javascript
+   {
+     name: "Your Goat's Name",
+     image: img("your-goat-filename.jpg"), // Just the filename, the path is handled by the img() function
+     description: html`
+       Your goat's description here. You can use HTML tags for formatting.
+       Keep it respectful and fun!
+     `,
+   },
+   ```
+4. Submit a Pull Request with your changes
+
+**Note**: The site now uses a consolidated approach where all goat data is defined in a single file (`goats.js`) and automatically made available to the frontend.
+
 ## Usage
 
 After installation, run `npm install` and then run `npm start` which will open up a preview of the site in your default browser, watch for changes to files, and reload the browser when changes are saved.
@@ -27,45 +69,4 @@ lefthook install
 
 ## Deployment
 
-The site is deployed using Github Actions on successful pull requests to `main`. You should be able to see your changes right away on [https://snowgo.at](https://snowgo.at). If, for some reason, changes aren't reflected immediately it could be a caching issue with CloudFlare.
-
-### Cloudflare Workers Deployment
-
-The site can also be deployed using Cloudflare Workers:
-
-#### Manual Deployment
-
-1. Install Wrangler CLI:
-   ```bash
-   npm install -g wrangler
-   ```
-
-2. Authenticate with Cloudflare:
-   ```bash
-   wrangler login
-   ```
-
-3. Update the `wrangler.toml` file with your Cloudflare account details:
-   - `account_id`: Your Cloudflare account ID
-   - `zone_id`: The zone ID for your domain (if deploying to a custom domain)
-   - `route`: The route pattern for your site (if deploying to a custom domain)
-
-4. Build and deploy the site:
-   ```bash
-   npm run cloudflare-build
-   wrangler publish
-   ```
-
-#### Automated Deployment with GitHub Actions
-
-The project includes a GitHub Actions workflow that automatically builds and deploys the site to Cloudflare Workers when changes are pushed to the `main` branch.
-
-To set up automated deployment:
-
-1. Add the following secrets to your GitHub repository:
-   - `CLOUDFLARE_API_TOKEN`: Your Cloudflare API token
-   - `CLOUDFLARE_ACCOUNT_ID`: Your Cloudflare account ID
-
-2. Push changes to the `main` branch, and the site will be automatically deployed to Cloudflare Workers.
-
-For more details, see the [workers-site/README.md](workers-site/README.md) file.
+The site is deployed automatically on successful pull requests to `main`. You should be able to see your changes right away on [https://snowgo.at](https://snowgo.at). If, for some reason, changes aren't reflected immediately it could be a caching issue.

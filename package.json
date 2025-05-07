@@ -21,7 +21,8 @@
     "clean": "rm -rf dist",
     "cloudflare-build": "npm run clean && node build-for-cloudflare.js",
     "test-cloudflare": "node test-cloudflare-build.js",
-    "fix-package-lock": "node fix-package-lock.js"
+    "fix-package-lock": "node fix-package-lock.js",
+    "add-goat": "node scripts/add-goat.js"
   },
   "devDependencies": {
     "glob": "^10.3.10",

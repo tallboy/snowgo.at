@@ -57,7 +57,24 @@ try {
     console.log('Copying root images...');
     execSync(`cp ${path.join(__dirname, 'img')}/*.png ${path.join(__dirname, 'dist', 'img')}/ 2>/dev/null || true`);
     
-    console.log('All images copied successfully.');
+    // Verify that all image files were copied correctly
+    const sourceGoatsDir = path.join(__dirname, 'img', 'goats');
+    const destGoatsDir = path.join(__dirname, 'dist', 'img', 'goats');
+    
+    if (fs.existsSync(sourceGoatsDir) && fs.existsSync(destGoatsDir)) {
+      const sourceFiles = fs.readdirSync(sourceGoatsDir);
+      const destFiles = fs.readdirSync(destGoatsDir);
+      
+      console.log(`Source goats directory contains ${sourceFiles.length} files`);
+      console.log(`Destination goats directory contains ${destFiles.length} files`);
+      
+      if (sourceFiles.length !== destFiles.length) {
+        console.warn('Warning: Number of files in source and destination directories do not match!');
+        console.log('Missing files:', sourceFiles.filter(file => !destFiles.includes(file)));
+      } else {
+        console.log('All image files copied successfully.');
+      }
+    }
     
     // Skip the optimization step as it's causing issues
     console.log('Skipping image optimization due to compatibility issues.');
