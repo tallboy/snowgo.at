@@ -1,0 +1,22 @@
+name = "snow-goat"
+main = "workers-site/index.js"
+compatibility_date = "2025-05-06"
+workers_dev = true
+
+[site]
+bucket = "./dist"
+pages_build_output_dir = "dist"
+include = ["**/*"]
+
+[build]
+command = "npm run cloudflare-build"
+upload.format = "service-worker"
+
+[env.production]
+name = "snow-goat-prod"
+
+# Ensure static assets are properly handled
+[[rules]]
+type = "Data"
+globs = ["**/*.jpg", "**/*.jpeg", "**/*.png", "**/*.gif", "**/*.ico"]
+fallthrough = true

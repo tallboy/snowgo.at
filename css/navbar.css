@@ -4,69 +4,105 @@
   padding-top: calc(1rem + 1px);
   padding-bottom: 1rem;
   font: var(--font-heading);
+  background-color: #003452 !important;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  
   .navbar-brand {
     color: var(--white);
+    font-weight: 700;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
   }
+  
   .navbar-nav {
     margin-top: 1rem;
     letter-spacing: 0.0625rem;
+    
     li.nav-item {
       a.nav-link {
         color: var(--white);
+        transition: all 0.3s ease;
+        border-radius: 50px;
+        margin: 0 0.25rem;
+        font-weight: 500;
+        font-size: 0.95rem;
+        letter-spacing: 0.5px;
+        
         &:hover {
-          color: var(--primary);
+          color: var(--white);
+          background-color: rgba(255, 255, 255, 0.1);
+          transform: translateY(-2px);
         }
+        
         &:active,
         &:focus {
           color: var(--white);
         }
+        
         &.active {
-          color: var(--primary);
+          color: var(--white);
+          background-color: var(--wasabi-green);
         }
       }
     }
   }
+  
   .navbar-toggler {
     font-size: 80%;
     padding: 0.8rem;
+    border: none;
+    background-color: var(--wasabi-green);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background-color: var(--wasabi-green-light);
+      transform: translateY(-2px);
+    }
   }
 }
 @media (min-width: 992px) {
   #mainNav {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
-    -webkit-transition:
-      padding-top 0.3s,
-      padding-bottom 0.3s;
-    -moz-transition:
-      padding-top 0.3s,
-      padding-bottom 0.3s;
-    transition:
-      padding-top 0.3s,
-      padding-bottom 0.3s;
+    transition: all 0.3s ease;
+    
     .navbar-brand {
       font-size: 2em;
-      -webkit-transition: font-size 0.3s;
-      -moz-transition: font-size 0.3s;
-      transition: font-size 0.3s;
+      transition: all 0.3s ease;
     }
+    
     .navbar-nav {
       margin-top: 0;
     }
+    
+    .navbar-nav > li.nav-item > a.nav-link {
+      padding: 0.8rem 1.2rem;
+    }
+    
     .navbar-nav > li.nav-item > a.nav-link.active {
       color: var(--white);
-      background: var(--primary);
+      background: var(--wasabi-green);
+      
       &:active,
       &:focus,
       &:hover {
         color: var(--white);
-        background: var(--primary);
+        background: var(--wasabi-green-light);
       }
     }
   }
+  
   #mainNav.navbar-shrink {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+    background-color: var(--wasabi-blue-dark) !important;
+    
     .navbar-brand {
       font-size: 1.5em;
     }
