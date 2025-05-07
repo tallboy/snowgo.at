@@ -42,31 +42,28 @@ If you prefer to add a goat manually, follow these steps:
    ```
 4. Submit a Pull Request with your changes
 
-**Note**: The site now uses a consolidated approach where all goat data is defined in a single file (`goats.js`) and automatically made available to the frontend.
+**Note**: The site now uses a bundled approach where all goat data is defined in a single file (`js/goats-bundle.js`) that combines both the data and the loading logic. This approach eliminates path resolution issues and makes the build process more reliable for both local development and Cloudflare Pages deployment.
 
 ## 🚀 Usage
 
 After installation, run `npm install` and then run `npm start` which will open up a preview of the site in your default browser, watch for changes to files, and reload the browser when changes are saved.
 
-You can optionally install [lefthook](https://github.com/evilmartians/lefthook) to enable pre-commit and pre-push hooks to format and lint any changes you make:
-
-```sh
-# install lefthook globally. See:
-# https://github.com/evilmartians/lefthook/blob/master/docs/install.md
-# for other install methods
-brew install lefthook
-
-# enable lefthook for this repo (run from repository root directory):
-lefthook install
-```
+The project uses a simple development workflow with no additional tooling required beyond npm.
 
 #### 📜 Scripts
 
 - `npm start`: starts a local development server to preview changes
-- `npm run build`: builds a standalone directory of the project into `dist/`
-- `npm run lint`: checks the project for lint errors
-- `npm run lint-fix`: checks the project for lint errors, automatically fixing issues when possible
+- `npm run build`: builds a standalone directory of the project into `dist/` (alias for cloudflare-build)
+- `npm run cloudflare-build`: builds the project for Cloudflare Pages deployment
+- `npm run add-goat`: helper script to add a new goat to the site
 
 ## 🌐 Deployment
 
-The site is deployed automatically on successful pull requests to `main`. You should be able to see your changes right away on [https://snowgo.at](https://snowgo.at). If, for some reason, changes aren't reflected immediately it could be a caching issue.
+The site is deployed to Cloudflare Pages automatically on successful pull requests to `main`. The deployment uses the bundled approach to ensure all goat images and data are properly included in the build.
+
+The build process:
+1. Creates a `dist` directory with all necessary files
+2. Bundles goat data directly into JavaScript for reliable loading
+3. Copies all images and assets to their correct locations
+
+You should be able to see your changes right away on [https://snowgo.at](https://snowgo.at). If changes aren't reflected immediately, it could be a caching issue.
