@@ -37,6 +37,16 @@ try {
   execSync(`mkdir -p ${path.join(__dirname, 'dist', 'js')}`);
   execSync(`cp -R ${path.join(__dirname, 'js')}/* ${path.join(__dirname, 'dist', 'js')}`);
   
+  // Copy goats.js to dist directory
+  console.log('Copying goats.js to dist directory...');
+  try {
+    execSync(`cp ${path.join(__dirname, 'goats.js')} ${path.join(__dirname, 'dist')}`);
+    console.log('Successfully copied goats.js to dist directory');
+  } catch (error) {
+    console.error('Error copying goats.js:', error);
+    console.log('Will rely on fallback data');
+  }
+  
   console.log('Copying image files...');
   try {
     // Create image directory if it doesn't exist
@@ -47,12 +57,16 @@ try {
     execSync(`mkdir -p ${path.join(__dirname, 'dist', 'img', 'goats')}`);
     execSync(`mkdir -p ${path.join(__dirname, 'dist', 'img', 'favicons')}`);
     
-    // Copy images directly with explicit paths for each subdirectory
+    // Copy images directly with explicit paths for each subdirectory, excluding .DS_Store files
     console.log('Copying goat images...');
-    execSync(`cp -R ${path.join(__dirname, 'img', 'goats')}/* ${path.join(__dirname, 'dist', 'img', 'goats')}`);
+    execSync(`cp ${path.join(__dirname, 'img', 'goats')}/* ${path.join(__dirname, 'dist', 'img', 'goats')}/ 2>/dev/null || true`);
+    
+    // Remove any .DS_Store files from the destination
+    console.log('Removing any .DS_Store files...');
+    execSync(`find ${path.join(__dirname, 'dist')} -name ".DS_Store" -type f -delete`);
     
     console.log('Copying favicon images...');
-    execSync(`cp -R ${path.join(__dirname, 'img', 'favicons')}/* ${path.join(__dirname, 'dist', 'img', 'favicons')}`);
+    execSync(`cp ${path.join(__dirname, 'img', 'favicons')}/* ${path.join(__dirname, 'dist', 'img', 'favicons')}/ 2>/dev/null || true`);
     
     console.log('Copying root images...');
     execSync(`cp ${path.join(__dirname, 'img')}/*.png ${path.join(__dirname, 'dist', 'img')}/ 2>/dev/null || true`);
@@ -62,15 +76,20 @@ try {
     const destGoatsDir = path.join(__dirname, 'dist', 'img', 'goats');
     
     if (fs.existsSync(sourceGoatsDir) && fs.existsSync(destGoatsDir)) {
-      const sourceFiles = fs.readdirSync(sourceGoatsDir);
+      // Filter out .DS_Store files from the source directory
+      const sourceFiles = fs.readdirSync(sourceGoatsDir)
+        .filter(file => file !== '.DS_Store' && !fs.statSync(path.join(sourceGoatsDir, file)).isDirectory());
       const destFiles = fs.readdirSync(destGoatsDir);
       
-      console.log(`Source goats directory contains ${sourceFiles.length} files`);
+      console.log(`Source goats directory contains ${sourceFiles.length} valid image files`);
       console.log(`Destination goats directory contains ${destFiles.length} files`);
       
-      if (sourceFiles.length !== destFiles.length) {
-        console.warn('Warning: Number of files in source and destination directories do not match!');
-        console.log('Missing files:', sourceFiles.filter(file => !destFiles.includes(file)));
+      // Check if all valid source files (excluding .DS_Store) are in the destination
+      const missingFiles = sourceFiles.filter(file => !destFiles.includes(file));
+      
+      if (missingFiles.length > 0) {
+        console.warn('Warning: Some image files were not copied!');
+        console.log('Missing files:', missingFiles);
       } else {
         console.log('All image files copied successfully.');
       }
