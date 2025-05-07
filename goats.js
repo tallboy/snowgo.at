@@ -14,6 +14,18 @@ export default [
     `,
   },
   {
+    name: "Sierra Morehardt",
+    image: img("sierra-morehardt.jpeg"),
+    description: html`
+      Sierra is the fastest SNOW goat around. Many call her a SNOW leopard. To
+      Sierra, PR means personal record, and she just set one while running her
+      most recent half marathon in under two hours. She writes clean code, gives
+      the best playlist recommendations, and always remembers to mute herself on
+      Zoom. She's cool under pressure, and even cooler at happy hour. Oh and
+      she's also very humble.
+    `,
+  },
+  {
     name: "Tony Nguyen",
     image: img("tony-nguyen.jpeg"),
     description: html`
