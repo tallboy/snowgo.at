@@ -171,9 +171,12 @@ const goatsData = [
   },
 ];
 
-// Make goats data available globally
+// Immediately make goats data available globally
 window.goatsData = goatsData;
-console.log(`Loaded ${goatsData.length} goats`);
+console.log(`🐐 Loaded ${goatsData.length} goats`);
 
-// Dispatch an event to notify that goats data is loaded
-window.dispatchEvent(new CustomEvent('goatsDataLoaded', { detail: { goatsData } }));
+// Also dispatch an event for components that might be listening
+document.addEventListener('DOMContentLoaded', function() {
+  console.log(`🐐 DOM loaded, dispatching goatsDataLoaded event`);
+  window.dispatchEvent(new CustomEvent('goatsDataLoaded', { detail: { goatsData } }));
+});

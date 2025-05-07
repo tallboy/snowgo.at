@@ -1,4 +1,5 @@
-import * as bootstrap from "bootstrap";
+// Use the global bootstrap object instead of importing it
+// This avoids the 'Failed to resolve module specifier "bootstrap"' error
 
 // Helper function to slugify a string (for IDs)
 function slugify(text) {
@@ -14,16 +15,25 @@ function slugify(text) {
 
 // Function to render goats on the page
 function renderGoats(goatsData) {
+  console.log('🐐 renderGoats called with data:', goatsData);
+  
   if (!goatsData || !Array.isArray(goatsData) || goatsData.length === 0) {
     console.error('No goats data available');
-    document.getElementById('goats-container').innerHTML = `
-      <div class="col-12 text-center">
-        <div class="alert alert-warning">
-          <h4>No goats data available</h4>
-          <p>Please check the console for more information.</p>
+    const container = document.getElementById('goats-container');
+    console.log('🐐 goats-container element:', container);
+    
+    if (container) {
+      container.innerHTML = `
+        <div class="col-12 text-center">
+          <div class="alert alert-warning">
+            <h4>No goats data available</h4>
+            <p>Please check the console for more information.</p>
+          </div>
         </div>
-      </div>
-    `;
+      `;
+    } else {
+      console.error('🐐 goats-container element not found!');
+    }
     return;
   }
   
@@ -147,18 +157,38 @@ function initializeUI() {
   document.getElementById('current-year').textContent = new Date().getFullYear();
   
   // Set up Bootstrap ScrollSpy
-  const scrollSpy = new bootstrap.ScrollSpy(document.body, {
-    target: "#mainNav",
-    offset: 80,
-  });
+  try {
+    if (typeof bootstrap !== 'undefined' && bootstrap.ScrollSpy) {
+      const scrollSpy = new bootstrap.ScrollSpy(document.body, {
+        target: "#mainNav",
+        offset: 80,
+      });
+      console.log('🐐 ScrollSpy initialized');
+    } else {
+      console.warn('🐐 Bootstrap ScrollSpy not available');
+    }
+  } catch (error) {
+    console.error('🐐 Error initializing ScrollSpy:', error);
+  }
   
   // Closes responsive menu when a scroll trigger link is clicked
   document.querySelectorAll(".js-scroll-trigger").forEach((node) => {
     node.addEventListener("click", () => {
       const navbarCollapse = document.querySelector(".navbar-collapse");
       if (navbarCollapse && navbarCollapse.classList.contains('show')) {
-        const bsCollapse = new bootstrap.Collapse(navbarCollapse);
-        bsCollapse.hide();
+        try {
+          if (typeof bootstrap !== 'undefined' && bootstrap.Collapse) {
+            const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+            bsCollapse.hide();
+          } else {
+            // Fallback if bootstrap is not available
+            navbarCollapse.classList.remove('show');
+          }
+        } catch (error) {
+          console.error('🐐 Error with navbar collapse:', error);
+          // Fallback
+          navbarCollapse.classList.remove('show');
+        }
       }
     });
   });
@@ -193,26 +223,41 @@ function initializeUI() {
 
 // Main initialization
 document.addEventListener('DOMContentLoaded', function() {
+  console.log('🐐 DOM fully loaded and parsed');
+  
   // Initialize UI elements
   initializeUI();
   
-  // Show loading indicator
-  document.getElementById('goats-container').innerHTML = `
-    <div class="col-12 text-center">
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-      <p class="mt-2">Loading goats...</p>
-    </div>
-  `;
+  // Get the goats container
+  const goatsContainer = document.getElementById('goats-container');
   
-  // Check if goats data is already available
-  if (window.goatsData && Array.isArray(window.goatsData)) {
-    renderGoats(window.goatsData);
+  if (goatsContainer) {
+    // Show loading indicator
+    goatsContainer.innerHTML = `
+      <div class="col-12 text-center">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-2">Loading goats...</p>
+      </div>
+    `;
+    
+    console.log('🐐 Checking for goats data...');
+    console.log('🐐 window.goatsData:', window.goatsData);
+    
+    // Check if goats data is already available
+    if (window.goatsData && Array.isArray(window.goatsData)) {
+      console.log('🐐 Goats data found, rendering...');
+      renderGoats(window.goatsData);
+    } else {
+      console.log('🐐 No goats data yet, setting up event listener...');
+      // Listen for the goatsDataLoaded event
+      window.addEventListener('goatsDataLoaded', function(event) {
+        console.log('🐐 goatsDataLoaded event received:', event.detail);
+        renderGoats(event.detail.goatsData);
+      });
+    }
   } else {
-    // Listen for the goatsDataLoaded event
-    window.addEventListener('goatsDataLoaded', function(event) {
-      renderGoats(event.detail.goatsData);
-    });
+    console.error('🐐 goats-container element not found in the DOM!');
   }
 });
