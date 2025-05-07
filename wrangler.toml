@@ -1,21 +1,24 @@
+# 🐐 Snow Goat Cloudflare Configuration 🐐
 name = "snow-goat"
-main = "workers-site/index.js"
 compatibility_date = "2025-05-06"
-workers_dev = true
 
+# Build configuration
+[build]
+command = "npm run cloudflare-build"
+
+# Site configuration for Cloudflare Pages
 [site]
 bucket = "./dist"
 pages_build_output_dir = "dist"
-include = ["**/*"]
 
-[build]
-command = "npm run cloudflare-build"
-upload.format = "service-worker"
+# Routes configuration
+[routes]
+  # Serve index.html for SPA routes
+  pattern = "/*"
+  script = "workers-site/index.js"
+  handler = "fetch"
 
-[env.production]
-name = "snow-goat-prod"
-
-# Ensure static assets are properly handled
+# Static asset handling
 [[rules]]
 type = "Data"
 globs = ["**/*.jpg", "**/*.jpeg", "**/*.png", "**/*.gif", "**/*.ico"]

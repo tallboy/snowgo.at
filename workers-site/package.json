@@ -7,6 +7,9 @@
   "type": "module",
   "author": "Tommy Ryan",
   "license": "MIT",
+  "dependencies": {
+    "@cloudflare/kv-asset-handler": "^0.3.0"
+  },
   "engines": {
     "node": ">=16.13.0"
   }

@@ -1,75 +1,126 @@
 /**
- * Modern Cloudflare Workers script for serving static assets
- * This script serves files from the dist directory
+ * 🐐 Snow Goat - Cloudflare Workers script for serving static assets
+ * This script serves files from the dist directory with proper content types
  */
 
+import { getAssetFromKV } from '@cloudflare/kv-asset-handler';
+
+/**
+ * The DEBUG flag will do two things:
+ * 1. We will skip caching on the edge, making it easier to debug
+ * 2. We will return more detailed error messages to the client
+ */
+const DEBUG = false;
+
+/**
+ * Define content type mappings for file extensions
+ */
+const CONTENT_TYPES = {
+  '.html': 'text/html; charset=UTF-8',
+  '.css': 'text/css; charset=UTF-8',
+  '.js': 'application/javascript; charset=UTF-8',
+  '.json': 'application/json; charset=UTF-8',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.svg': 'image/svg+xml',
+  '.ico': 'image/x-icon',
+  '.gif': 'image/gif'
+};
+
+/**
+ * Handle all requests to the worker
+ */
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     let path = url.pathname;
     
-    // If path is '/' or empty, serve index.html
-    if (path === '/' || path === '') {
-      path = '/index.html';
-    }
+    // Add some debugging information to the console
+    console.log(`🐐 Handling request for ${path}`);
     
-    // Try to serve the requested file from the assets
     try {
-      // Get the file from the static assets
-      const response = await env.ASSETS.fetch(new Request(url.toString(), request));
-      
-      // If the file is found, return it
-      if (response.status === 200) {
-        // Set appropriate cache headers
-        const headers = new Headers(response.headers);
-        headers.set('Cache-Control', 'public, max-age=3600');
-        
-        // Set content type based on file extension
-        if (path.endsWith('.html')) {
-          headers.set('Content-Type', 'text/html; charset=UTF-8');
-        } else if (path.endsWith('.css')) {
-          headers.set('Content-Type', 'text/css; charset=UTF-8');
-        } else if (path.endsWith('.js')) {
-          headers.set('Content-Type', 'application/javascript; charset=UTF-8');
-        } else if (path.endsWith('.json')) {
-          headers.set('Content-Type', 'application/json; charset=UTF-8');
-        } else if (path.endsWith('.png')) {
-          headers.set('Content-Type', 'image/png');
-        } else if (path.endsWith('.jpg') || path.endsWith('.jpeg')) {
-          headers.set('Content-Type', 'image/jpeg');
-        } else if (path.endsWith('.svg')) {
-          headers.set('Content-Type', 'image/svg+xml');
-        } else if (path.endsWith('.ico')) {
-          headers.set('Content-Type', 'image/x-icon');
-        }
-        
-        return new Response(response.body, {
-          status: 200,
-          headers
-        });
+      // If path is '/' or empty, serve index.html
+      if (path === '/' || path === '') {
+        path = '/index.html';
       }
       
-      // If file not found, try to serve index.html for SPA routing
-      if (response.status === 404 && !path.includes('.')) {
-        const indexResponse = await env.ASSETS.fetch(new Request(`${url.origin}/index.html`, request));
-        if (indexResponse.status === 200) {
-          return new Response(indexResponse.body, {
-            status: 200,
-            headers: {
-              'Content-Type': 'text/html; charset=UTF-8',
-              'Cache-Control': 'public, max-age=3600'
-            }
-          });
-        }
+      // Try to get the asset from KV storage
+      let options = {};
+      
+      if (DEBUG) {
+        // Customize caching for debugging
+        options.cacheControl = {
+          bypassCache: true,
+        };
+      } else {
+        // Customize caching for production
+        options.cacheControl = {
+          browserTTL: 60 * 60 * 24, // 1 day
+          edgeTTL: 60 * 60 * 24 * 7, // 7 days
+          bypassCache: false,
+        };
       }
       
-      // If still not found, return 404
-      return new Response('Not Found', { status: 404 });
+      // Special handling for image files to ensure they load properly
+      const extension = path.substring(path.lastIndexOf('.') || path.length);
+      if (CONTENT_TYPES[extension]) {
+        options.mapRequestToAsset = req => {
+          const url = new URL(req.url);
+          url.pathname = path;
+          return new Request(url.toString(), req);
+        };
+      }
+      
+      // Get the asset from KV
+      const asset = await getAssetFromKV({
+        request,
+        waitUntil: ctx.waitUntil.bind(ctx),
+      }, options);
+      
+      // Set appropriate content type based on file extension
+      const contentType = CONTENT_TYPES[extension];
+      if (contentType) {
+        const response = new Response(asset.body, asset);
+        response.headers.set('Content-Type', contentType);
+        response.headers.set('X-Snow-Goat', '🐐');
+        return response;
+      }
+      
+      // Return the asset as-is if no special content type handling is needed
+      return asset;
+      
     } catch (e) {
-      // If an error occurs, return a 500 error
-      return new Response('Internal Server Error: ' + (e.message || e.toString()), {
-        status: 500
-      });
+      // If an error occurs, return a 404 for missing assets or 500 for other errors
+      if (e.status === 404 || e.code === 'ENOENT') {
+        // For SPA routing, serve index.html for non-file requests
+        if (!path.includes('.')) {
+          try {
+            const notFoundResponse = await getAssetFromKV({
+              request: new Request(`${url.origin}/index.html`, request),
+              waitUntil: ctx.waitUntil.bind(ctx),
+            });
+            return new Response(notFoundResponse.body, {
+              ...notFoundResponse,
+              status: 200,
+              headers: {
+                ...notFoundResponse.headers,
+                'Content-Type': 'text/html; charset=UTF-8',
+              }
+            });
+          } catch (error) {
+            // If we can't even get the index.html, return a generic 404
+            return new Response('Not Found', { status: 404 });
+          }
+        }
+        
+        // Otherwise, return a 404 response
+        return new Response('Not Found', { status: 404 });
+      }
+      
+      // For all other errors, return a 500 response
+      const errorMessage = DEBUG ? `Error: ${e.message || e.toString()}` : 'Internal Server Error';
+      return new Response(errorMessage, { status: 500 });
     }
   }
 };
